@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rifts &amp; Revolvers — Core Rules</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Special+Elite&family=Lato:wght@300;400;700&display=swap');
+
+:root {
+  --parchment:   #f0e6c8;
+  --parchment-dk:#d9c99a;
+  --ink:         #1a1208;
+  --blood:       #8b1a1a;
+  --teal:        #0e6b6b;
+  --teal-bright: #1ec8c8;
+  --rust:        #7a3b1e;
+  --gold:        #b8860b;
+  --ghost:       #c8b8f0;
+  --hearts:      #c0192a;
+  --spades:      #1a1a1a;
+  --clubs:       #0e4a4a;
+  --diamonds:    #8a6800;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0d0a06;color:var(--ink);font-family:'Lato',sans-serif;font-size:15px;line-height:1.65}
+
+/* ◈◈ COVER ◈◈ */
+.cover{min-height:100vh;background:radial-gradient(ellipse at 50% 30%,#0e6b6b22 0%,transparent 60%),radial-gradient(ellipse at 80% 80%,#8b1a1a33 0%,transparent 50%),linear-gradient(160deg,#0d0a06 0%,#1a1208 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3rem 1.5rem;text-align:center;position:relative;overflow:hidden}
+.rift-ring{position:absolute;border-radius:50%;border:1px solid var(--teal-bright);opacity:.12;animation:pulse 6s ease-in-out infinite}
+.rift-ring:nth-child(1){width:300px;height:300px;top:-80px;left:-80px;animation-delay:0s}
+.rift-ring:nth-child(2){width:200px;height:200px;bottom:60px;right:40px;animation-delay:2s}
+.rift-ring:nth-child(3){width:120px;height:120px;top:40%;left:10%;animation-delay:4s;border-color:var(--blood)}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:.12}50%{transform:scale(1.08);opacity:.22}}
+.cover-eyebrow{font-family:'Special Elite',serif;color:var(--teal-bright);letter-spacing:.35em;font-size:.7rem;text-transform:uppercase;margin-bottom:1.2rem;opacity:.8}
+.cover-title{font-family:'Playfair Display',serif;font-size:clamp(3rem,10vw,6.5rem);font-weight:900;color:var(--parchment);line-height:1;text-shadow:0 0 40px #0e6b6b55,2px 4px 0 #8b1a1a66;letter-spacing:.02em}
+.cover-title .amp{color:var(--blood);font-style:italic}
+.cover-sub{font-family:'Special Elite',serif;color:var(--parchment-dk);margin-top:1rem;font-size:1rem;letter-spacing:.12em;opacity:.75}
+.cover-divider{width:160px;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:2rem auto}
+.cover-tagline{font-family:'Lato',sans-serif;color:#b0a080;font-size:.85rem;font-weight:300;letter-spacing:.08em;max-width:380px;font-style:italic}
+.cover-scroll{margin-top:3rem;color:var(--teal-bright);font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;opacity:.5;animation:blink 2.5s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:.5}50%{opacity:.9}}
+
+/* ◈◈ PAGE ◈◈ */
+.page{background:var(--parchment);max-width:820px;margin:0 auto;padding:3rem 2.5rem 4rem;position:relative}
+.page::before{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");opacity:.5;pointer-events:none}
+.section-divider{border:none;height:2px;background:linear-gradient(90deg,transparent,var(--parchment-dk),transparent);margin:2.5rem 0}
+
+/* ◈◈ TYPE ◈◈ */
+.chapter-label{font-family:'Special Elite',serif;font-size:.65rem;letter-spacing:.4em;text-transform:uppercase;color:var(--rust);margin-bottom:.4rem}
+h2{font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:var(--ink);line-height:1.15;margin-bottom:.5rem;border-bottom:2px solid var(--blood);padding-bottom:.4rem}
+h3{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--blood);margin:1.8rem 0 .5rem}
+h4{font-family:'Special Elite',serif;font-size:.95rem;color:var(--rust);letter-spacing:.06em;margin:1.2rem 0 .3rem}
+p{margin-bottom:.8rem}
+
+/* ◈◈ FLAVOUR ◈◈ */
+.flavour{border-left:3px solid var(--blood);padding:.8rem 1.2rem;background:#d9c99a55;font-style:italic;font-size:.88rem;color:var(--rust);margin:1.5rem 0;font-family:'Special Elite',serif}
+
+/* ◈◈ RULE BOXES ◈◈ */
+.rule-box{border:1px solid var(--parchment-dk);border-top:3px solid var(--teal);background:#fff8e8;padding:1.2rem 1.4rem;margin:1.4rem 0;border-radius:2px}
+.rule-box.blood-box{border-top-color:var(--blood)}
+.rule-box.ghost-box{border-top-color:#8866cc;background:#f4f0ff}
+.rule-box.gold-box{border-top-color:var(--gold)}
+
+/* ◈◈ FLOW STEPS ◈◈ */
+.flow{display:flex;flex-direction:column;gap:.6rem;margin:1.2rem 0}
+.flow-step{display:flex;gap:1rem;align-items:flex-start}
+.flow-num{width:28px;height:28px;border-radius:50%;background:var(--blood);color:var(--parchment);font-family:'Special Elite',serif;font-size:.8rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.1rem}
+.flow-num.teal{background:var(--teal)}
+.flow-num.gold{background:var(--gold);color:var(--ink)}
+.flow-num.ghost{background:#7744aa}
+.flow-text{font-size:.88rem}
+
+/* ◈◈ TABLES ◈◈ */
+table{width:100%;border-collapse:collapse;font-size:.82rem;margin:1rem 0}
+th{font-family:'Special Elite',serif;background:var(--ink);color:var(--parchment);padding:.5rem .8rem;text-align:left;letter-spacing:.08em;font-size:.7rem;text-transform:uppercase}
+td{padding:.45rem .8rem;border-bottom:1px solid var(--parchment-dk);vertical-align:top}
+tr:nth-child(even) td{background:#e8d8b0}
+
+/* ◈◈ KEYWORDS ◈◈ */
+.kw{display:inline-block;font-family:'Special Elite',serif;font-size:.65rem;letter-spacing:.1em;padding:.1rem .45rem;border-radius:2px;vertical-align:middle}
+.kw-teal{background:var(--teal);color:var(--parchment)}
+.kw-red{background:var(--blood);color:var(--parchment)}
+.kw-purple{background:#7744aa;color:var(--parchment)}
+.kw-gold{background:var(--gold);color:var(--ink)}
+
+/* ◈◈ HAND DISPLAY ◈◈ */
+.hand-section{background:#1a1208;color:var(--parchment);padding:2rem;margin:2rem 0;border-radius:4px;border:1px solid var(--gold)}
+.hand-title{font-family:'Special Elite',serif;color:var(--gold);letter-spacing:.25em;font-size:.75rem;text-transform:uppercase;margin-bottom:1.5rem;text-align:center}
+.hand-ranking{display:grid;gap:.5rem}
+.hand-row{display:flex;align-items:center;gap:1rem;padding:.55rem .8rem;border-radius:3px;transition:background .2s;flex-wrap:wrap}
+.hand-row:hover{background:#ffffff10}
+.hand-rank{font-family:'Special Elite',serif;font-size:.65rem;color:var(--gold);width:1.5rem;text-align:center;opacity:.7}
+.hand-name{font-family:'Playfair Display',serif;font-weight:700;font-size:.95rem;color:var(--parchment);min-width:140px}
+.hand-dice{display:flex;gap:.3rem;flex-wrap:wrap}
+.die{width:28px;height:28px;border-radius:5px;border:1.5px solid #ffffff30;background:#2a2010;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;font-family:'Lato',sans-serif;color:var(--parchment)}
+.die.locked{border-color:var(--teal-bright);background:#0e3d3d;color:var(--teal-bright)}
+.die.pre-locked{border-color:var(--gold);background:#3a2a00;color:var(--gold)}
+.die.wild{border-color:#aa44cc;background:#2a0a3a;color:#cc88ff}
+.hand-effect{font-size:.78rem;color:#b0a080;font-style:italic;margin-left:auto;text-align:right;max-width:180px}
+.hand-pct{font-size:.68rem;color:#806040;min-width:60px;text-align:right}
+
+/* ◈◈ CLASS GRID ◈◈ */
+.class-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin:1.2rem 0}
+.class-card{border:1px solid var(--parchment-dk);padding:1rem;background:#fffaf0;border-radius:2px;position:relative;overflow:hidden}
+.class-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.class-card.hearts-card::before{background:var(--hearts)}
+.class-card.spades-card::before{background:#555}
+.class-card.clubs-card::before{background:var(--clubs)}
+.class-card.diamonds-card::before{background:var(--diamonds)}
+.class-name{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;margin-bottom:.2rem}
+.class-suit-badge{display:inline-block;font-family:'Special Elite',serif;font-size:.6rem;letter-spacing:.2em;padding:.1rem .5rem;border-radius:2px;margin-bottom:.5rem}
+.hearts-badge-bg{background:var(--hearts);color:var(--parchment)}
+.spades-badge-bg{background:#333;color:var(--parchment)}
+.clubs-badge-bg{background:var(--clubs);color:var(--parchment)}
+.diamonds-badge-bg{background:var(--diamonds);color:var(--parchment)}
+.class-honor{font-family:'Special Elite',serif;font-size:.68rem;letter-spacing:.1em;margin-bottom:.5rem}
+.honor-pos{color:#1a6633}
+.honor-neg{color:var(--blood)}
+.class-chip-row{display:flex;gap:.3rem;flex-wrap:wrap;margin-bottom:.5rem}
+.chip-pip{width:18px;height:18px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:.55rem;font-weight:700;font-family:'Lato',sans-serif}
+.pip-w{background:#aaa;color:#333}
+.pip-r{background:#8b1a1a;color:#fff}
+.pip-b{background:#1a3a7a;color:#fff}
+.pip-g{background:#1a6633;color:#fff}
+.pip-k{background:#1a1208;color:var(--gold)}
+.class-flavor{font-size:.75rem;color:var(--rust);font-style:italic;margin-top:.5rem;border-top:1px solid var(--parchment-dk);padding-top:.4rem}
+
+/* ◈◈ CHIP CARDS ◈◈ */
+.chip-grid{display:flex;flex-direction:column;gap:1.2rem;margin:1.4rem 0}
+.chip-card{display:flex;gap:1.2rem;align-items:flex-start;border:1px solid var(--parchment-dk);border-radius:3px;padding:1rem 1.2rem;background:#fffaf0}
+.chip-visual{width:52px;height:52px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;border:4px dashed rgba(255,255,255,0.4);margin-top:.2rem}
+.chip-inner{font-family:'Playfair Display',serif;font-weight:900;font-size:1rem;color:rgba(255,255,255,0.9);text-shadow:0 1px 2px rgba(0,0,0,0.4)}
+.wchip{background:radial-gradient(circle at 35% 35%,#f5f5f5,#aaa);border-color:#ccc}
+.wchip .chip-inner{color:#333}
+.rchip{background:radial-gradient(circle at 35% 35%,#e05555,#8b1a1a);border-color:#c04040}
+.bchip{background:radial-gradient(circle at 35% 35%,#4488dd,#1a3a7a);border-color:#3366bb}
+.gchip{background:radial-gradient(circle at 35% 35%,#44aa66,#1a6633);border-color:#338855}
+.kchip{background:radial-gradient(circle at 35% 35%,#554433,#1a1208);border-color:var(--gold)}
+.kchip .chip-inner{color:var(--gold)}
+.chip-name{font-family:'Playfair Display',serif;font-weight:700;font-size:1rem;margin-bottom:.1rem}
+.chip-aka{font-family:'Special Elite',serif;font-size:.65rem;letter-spacing:.12em;color:var(--rust);margin-bottom:.4rem;text-transform:uppercase}
+.chip-start{display:inline-block;background:var(--ink);color:var(--parchment);font-family:'Special Elite',serif;font-size:.62rem;padding:.1rem .5rem;border-radius:2px;margin-bottom:.6rem;letter-spacing:.08em}
+.chip-desc{font-size:.83rem;margin-bottom:.5rem}
+.chip-spend{font-size:.78rem;background:#e8d8b0;padding:.5rem .7rem;border-left:2px solid var(--gold)}
+.chip-spend strong{color:var(--rust)}
+
+/* ◈◈ HONOR SCALE ◈◈ */
+.honor-scale{background:var(--ink);padding:1.2rem 1.5rem;border-radius:3px;margin:1.2rem 0}
+.scale-bar{height:20px;background:linear-gradient(90deg,#8b1a1a,#5a4a00,#1a6633);border-radius:10px;position:relative;margin:1rem 0}
+.scale-labels{display:flex;justify-content:space-between;font-family:'Special Elite',serif;font-size:.65rem;color:#b0a080;letter-spacing:.1em}
+.scale-markers{display:flex;justify-content:space-between;position:relative;margin-top:.5rem}
+.scale-mark{text-align:center;flex:1}
+.scale-mark-val{font-family:'Playfair Display',serif;font-size:.8rem;font-weight:700;color:var(--parchment)}
+.scale-mark-cls{font-family:'Special Elite',serif;font-size:.55rem;color:#806040;letter-spacing:.05em}
+
+/* ◈◈ SUIT BLOCKS ◈◈ */
+.suit-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.8rem;margin:1.2rem 0}
+.suit-block{border-radius:3px;padding:1rem}
+.suit-block.hearts-suit{background:#2a0808;color:var(--parchment)}
+.suit-block.spades-suit{background:#111;color:var(--parchment)}
+.suit-block.clubs-suit{background:#082020;color:var(--parchment)}
+.suit-block.diamonds-suit{background:#1a1400;color:var(--parchment)}
+.suit-sym{font-size:2rem;line-height:1;margin-bottom:.3rem}
+.hearts-suit .suit-sym{color:#ff5555}
+.spades-suit .suit-sym{color:#ddd}
+.clubs-suit .suit-sym{color:var(--teal-bright)}
+.diamonds-suit .suit-sym{color:var(--gold)}
+.suit-title{font-family:'Playfair Display',serif;font-weight:700;font-size:.95rem;margin-bottom:.2rem}
+.suit-theme{font-family:'Special Elite',serif;font-size:.58rem;letter-spacing:.15em;opacity:.6;text-transform:uppercase;margin-bottom:.4rem}
+.suit-classes{font-size:.75rem;opacity:.85}
+.suit-classes span{font-weight:700}
+
+/* ◈◈ MINIGAME HEADERS ◈◈ */
+.mg-header{padding:1.2rem 1.5rem;margin:0 0 1.2rem;border-radius:3px}
+.mg-label{font-family:'Special Elite',serif;font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;margin-bottom:.3rem;opacity:.75}
+.mg-title{font-family:'Playfair Display',serif;font-weight:900;font-size:1.6rem;line-height:1.1}
+.mg-spades{background:#111;color:var(--parchment);border-left:4px solid #aaa}
+.mg-hearts{background:#2a0808;color:var(--parchment);border-left:4px solid #ff5555}
+.mg-clubs{background:#082020;color:var(--parchment);border-left:4px solid var(--teal-bright)}
+.mg-diamonds{background:#1a1400;color:var(--parchment);border-left:4px solid var(--gold)}
+.mg-gold{background:#1a1208;color:var(--parchment);border-left:4px solid var(--gold)}
+.mg-rift{background:#1a0828;color:var(--parchment);border-left:4px solid #aa44cc}
+
+/* ◈◈ EXAMPLE BLOCK ◈◈ */
+.example-block{background:#1a1208;color:var(--parchment);padding:1rem 1.2rem;border-radius:3px;margin:1.2rem 0;font-size:.85rem;border-left:3px solid var(--gold)}
+.example-label{font-family:'Special Elite',serif;font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem}
+
+/* ◈◈ PASS DIAGRAM ◈◈ */
+.pass-diagram{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;background:var(--ink);padding:1.2rem 1.5rem;border-radius:3px;margin:1.2rem 0;justify-content:center}
+.pass-player{text-align:center;font-family:'Special Elite',serif;font-size:.72rem;color:var(--parchment);letter-spacing:.08em}
+.pass-hand{margin-top:.4rem;background:#2a2010;border:1px solid #ffffff20;border-radius:4px;padding:.3rem .5rem;font-size:.65rem;color:var(--gold);letter-spacing:.1em}
+.pass-arrow{font-family:'Special Elite',serif;font-size:.65rem;color:var(--gold);letter-spacing:.08em;text-align:center}
+
+/* ◈◈ CARD VISUALS ◈◈ */
+.card-mini{width:32px;height:44px;border-radius:4px;display:inline-flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;font-family:'Lato',sans-serif;border:1.5px solid rgba(255,255,255,.2);vertical-align:middle}
+.card-s{background:#2a2a2a;color:#eee}
+.card-h{background:#3a0a0a;color:#ff6666}
+.card-c{background:#0a2a2a;color:var(--teal-bright)}
+.card-d{background:#2a2a0a;color:var(--gold)}
+.card-back{background:#1a1208;color:var(--gold);border-color:var(--gold)}
+
+/* ◈◈ COVER POSITIONS ◈◈ */
+.cover-positions{display:flex;gap:1rem;align-items:center;flex-wrap:wrap;margin:1rem 0 1.5rem}
+.cover-pos{text-align:center}
+.cover-card-face{width:48px;height:68px;border-radius:5px;border:2px solid var(--parchment-dk);background:var(--ink);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin:0 auto .3rem;font-family:'Special Elite',serif}
+.cover-pos-label{font-family:'Special Elite',serif;font-size:.65rem;letter-spacing:.1em;color:var(--rust)}
+
+/* ◈◈ XP TRACK ◈◈ */
+.xp-track{background:var(--ink);padding:1.2rem 1.5rem;border-radius:3px;margin:1.2rem 0}
+.xp-row{display:flex;align-items:center;gap:.8rem;margin-bottom:.6rem}
+.xp-label{font-family:'Special Elite',serif;font-size:.68rem;color:var(--gold);letter-spacing:.1em;min-width:130px}
+.xp-pips{display:flex;gap:.2rem}
+.xp-pip{width:16px;height:16px;border-radius:50%;background:#2a2010;border:1px solid #ffffff20}
+.xp-pip.filled{background:var(--gold);border-color:var(--gold)}
+.xp-pip.partial{background:var(--rust);border-color:var(--rust)}
+
+/* ◈◈ FOOTER ◈◈ */
+.page-footer{background:var(--ink);color:#b0a080;text-align:center;padding:2rem 1.5rem;font-family:'Special Elite',serif;font-size:.7rem;letter-spacing:.2em}
+
+@media(max-width:600px){
+  .page{padding:2rem 1.2rem 3rem}
+  .hand-section{padding:1.2rem}
+  .hand-row{flex-wrap:wrap}
+  .hand-effect,.hand-pct{max-width:100%;text-align:left;margin-left:0;margin-top:.2rem}
+  .cover-title{font-size:2.8rem}
+  .chip-card{flex-direction:column;align-items:center}
+}
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<section class="cover">
+  <div class="rift-ring"></div><div class="rift-ring"></div><div class="rift-ring"></div>
+  <div class="cover-eyebrow">A Tabletop Roleplaying Game</div>
+  <div class="cover-title">Rifts <span class="amp">&amp;</span> Revolvers</div>
+  <div class="cover-sub">Cowboys · Robots · Magic · Dimensional Chaos</div>
+  <div class="cover-divider"></div>
+  <div class="cover-tagline">Where the frontier bleeds into dimensions unknown — and the only law is a loaded hand.</div>
+  <div class="cover-scroll">▼ &nbsp; Core Rules v2.0 &nbsp; ▼</div>
+</section>
+
+<!-- ─────────────────────────────────────────────────── -->
+<div class="page">
+
+<!-- ◈◈ CHAPTER 1: SETTING ◈◈ -->
+<div class="chapter-label">Chapter One</div>
+<h2>The Shattered Frontier</h2>
+
+<div class="flavour">"The Rifts opened in '72. The railroad barons said it was God's gift. The machines that crawled out said otherwise. The Seers just smiled." — Overheard at the Dustfall Saloon, Dimension Seven</div>
+
+<p><strong>Rifts &amp; Revolvers</strong> is set in the Shattered Frontier — a patchwork of overlapping dimensions where the American West collides with futures, pasts, and places that have no right to exist. Dimensional Rifts tear through reality without warning, depositing clockwork automatons, spell-slingers, and horrors into dusty frontier towns that already had plenty of their own problems.</p>
+
+<p>Players take on the role of Frontier folk — gunslingers, healers, tricksters, brawlers, and wanderers — each navigating a world where two things are always true: <em>the dice tell your story</em>, and <em>the cards change it</em>.</p>
+
+<h3>The Three Layers</h3>
+<p>Every action in Rifts &amp; Revolvers runs through three interlocking systems. Understanding how they divide their responsibilities is the key to the whole game.</p>
+
+<div class="rule-box gold-box">
+  <h4>Dice — The Story</h4>
+  <p>Poker dice resolve <em>what happens</em>. Roll five dice, build the best poker hand you can across up to three rolls, and the result tells you whether you succeeded and by how much. Only roll when failure has a real consequence — if you can't describe what losing looks like before you roll, don't roll.</p>
+</div>
+<div class="rule-box">
+  <h4>Cards — The Edge</h4>
+  <p>A double deck of playing cards (104 cards) sits at the center of the table. Every player holds a secret five-card Persistent Hand dealt at session start. Cards don't tell the story — they <em>bend</em> it. Discard a card to fuel a reroll. Trigger a class ability. Fuel the GM's pressure engine. The cards are what you do when the dice aren't enough.</p>
+</div>
+<div class="rule-box blood-box">
+  <h4>Chips — Your Status</h4>
+  <p>Five colors of poker chips track your health, nerve, luck, wealth, and the dimensional debt accumulating against your soul. They sit in front of you and tell the table exactly what kind of shape you're in — without anyone rolling a thing.</p>
+</div>
+
+<hr class="section-divider">
+
+<!-- ◈◈ CHAPTER 2: EIGHT CLASSES ◈◈ -->
+<div class="chapter-label">Chapter Two</div>
+<h2>Eight Classes of the Frontier</h2>
+
+<p>Choose one class at character creation. Your class determines your suit affinity, your starting chip stack, your position on the Honor/Notoriety scale, and which card abilities you can access. Two classes share each suit — one honorable, one notorious. They compete for the same cards.</p>
+
+<div class="suit-grid">
+  <div class="suit-block hearts-suit">
+    <div class="suit-sym">♥</div>
+    <div class="suit-title">Hearts — Connection</div>
+    <div class="suit-theme">Feeling · Healing · Manipulation</div>
+    <div class="suit-classes"><span>Doctor</span> (Honor +2) &amp; <span>Charlatan</span> (Notorious −2)</div>
+  </div>
+  <div class="suit-block spades-suit">
+    <div class="suit-sym">♠</div>
+    <div class="suit-title">Spades — Precision</div>
+    <div class="suit-theme">Control · Aim · Silence</div>
+    <div class="suit-classes"><span>Gunslinger</span> (Honor +2) &amp; <span>Bandit</span> (Notorious −2)</div>
+  </div>
+  <div class="suit-block clubs-suit">
+    <div class="suit-sym">♣</div>
+    <div class="suit-title">Clubs — Force</div>
+    <div class="suit-theme">Power · Endurance · Structure</div>
+    <div class="suit-classes"><span>Cogwright</span> (Honor +2) &amp; <span>Brawler</span> (Notorious −2)</div>
+  </div>
+  <div class="suit-block diamonds-suit">
+    <div class="suit-sym">♦</div>
+    <div class="suit-title">Diamonds — Transit</div>
+    <div class="suit-theme">Flux · Threshold · The Between</div>
+    <div class="suit-classes"><span>Seer</span> (Honor +2) &amp; <span>Drifter</span> (Notorious −2)</div>
+  </div>
+</div>
+
+<h3>Class Cards</h3>
+
+<div class="class-grid">
+  <div class="class-card hearts-card">
+    <div class="class-name">Doctor</div>
+    <div><span class="class-suit-badge hearts-badge-bg">♥ HEARTS</span></div>
+    <div class="class-honor honor-pos">Honor +2</div>
+    <div class="class-chip-row">
+      <span title="White/Grit">W</span>:&nbsp;
+      <span class="chip-pip pip-w">10</span><span class="chip-pip pip-w">+</span>
+      &nbsp;<span title="Red/Nerve">R</span>:&nbsp;
+      <span class="chip-pip pip-r">8</span>
+      &nbsp;<span title="Blue/Luck">B</span>:&nbsp;
+      <span class="chip-pip pip-b">3</span>
+    </div>
+    <div class="class-chip-row">
+      <span title="Green/Coin">G</span>:&nbsp;
+      <span class="chip-pip pip-g">4</span>
+      &nbsp;<span title="Black/Rift Debt">K</span>:&nbsp;
+      <span class="chip-pip pip-k">0</span>
+    </div>
+    <div class="class-flavor">Healer and support engine. Enables teammate redraws. Recovers White and Red chips through successful treatment.</div>
+  </div>
+
+  <div class="class-card hearts-card">
+    <div class="class-name">Charlatan</div>
+    <div><span class="class-suit-badge hearts-badge-bg">♥ HEARTS</span></div>
+    <div class="class-honor honor-neg">Notorious −2</div>
+    <div class="class-chip-row">
+      <span>W</span>:&nbsp;<span class="chip-pip pip-w">10</span>
+      &nbsp;<span>R</span>:&nbsp;<span class="chip-pip pip-r">7</span>
+      &nbsp;<span>B</span>:&nbsp;<span class="chip-pip pip-b">4</span>
+    </div>
+    <div class="class-chip-row">
+      <span>G</span>:&nbsp;<span class="chip-pip pip-g">6</span>
+      &nbsp;<span>K</span>:&nbsp;<span class="chip-pip pip-k">1</span>
+    </div>
+    <div class="class-flavor">Performance and misdirection. Forces rerolls against them. Recovers Green chips through successful cons.</div>
+  </div>
+
+  <div class="class-card spades-card">
+    <div class="class-name">Gunslinger</div>
+    <div><span class="class-suit-badge spades-badge-bg">♠ SPADES</span></div>
+    <div class="class-honor honor-pos">Honor +2</div>
+    <div class="class-chip-row">
+      <span>W</span>:&nbsp;<span class="chip-pip pip-w">12</span>
+      &nbsp;<span>R</span>:&nbsp;<span class="chip-pip pip-r">7</span>
+      &nbsp;<span>B</span>:&nbsp;<span class="chip-pip pip-b">3</span>
+    </div>
+    <div class="class-chip-row">
+      <span>G</span>:&nbsp;<span class="chip-pip pip-g">4</span>
+      &nbsp;<span>K</span>:&nbsp;<span class="chip-pip pip-k">0</span>
+    </div>
+    <div class="class-flavor">Precision and control. Best dice-locking in the game. Recovers Red chips through decisive duel wins.</div>
+  </div>
+
+  <div class="class-card spades-card">
+    <div class="class-name">Bandit</div>
+    <div><span class="class-suit-badge spades-badge-bg">♠ SPADES</span></div>
+    <div class="class-honor honor-neg">Notorious −2</div>
+    <div class="class-chip-row">
+      <span>W</span>:&nbsp;<span class="chip-pip pip-w">11</span>
+      &nbsp;<span>R</span>:&nbsp;<span class="chip-pip pip-r">7</span>
+      &nbsp;<span>B</span>:&nbsp;<span class="chip-pip pip-b">3</span>
+    </div>
+    <div class="class-chip-row">
+      <span>G</span>:&nbsp;<span class="chip-pip pip-g">5</span>
+      &nbsp;<span>K</span>:&nbsp;<span class="chip-pip pip-k">1</span>
+    </div>
+    <div class="class-flavor">Disruption and ambush. Heavy rerolls, can steal chips in the right situations. Forces enemy rerolls.</div>
+  </div>
+
+  <div class="class-card clubs-card">
+    <div class="class-name">Cogwright</div>
+    <div><span class="class-suit-badge clubs-badge-bg">♣ CLUBS</span></div>
+    <div class="class-honor honor-pos">Honor +2</div>
+    <div class="class-chip-row">
+      <span>W</span>:&nbsp;<span class="chip-pip pip-w">12</span>
+      &nbsp;<span>R</span>:&nbsp;<span class="chip-pip pip-r">7</span>
+      &nbsp;<span>B</span>:&nbsp;<span class="chip-pip pip-b">3</span>
+    </div>
+    <div class="class-chip-row">
+      <span>G</span>:&nbsp;<span class="chip-pip pip-g">5</span>
+      &nbsp;<span>K</span>:&nbsp;<span class="chip-pip pip-k">0</span>
+    </div>
+    <div class="class-flavor">Builder and saboteur. Locks dice through preparation. Recovers Green chips through salvage and engineering.</div>
+  </div>
+
+  <div class="class-card clubs-card">
+    <div class="class-name">Brawler</div>
+    <div><span class="class-suit-badge clubs-badge-bg">♣ CLUBS</span></div>
+    <div class="class-honor honor-neg">Notorious −2</div>
+    <div class="class-chip-row">
+      <span>W</span>:&nbsp;<span class="chip-pip pip-w">15</span>
+      &nbsp;<span>R</span>:&nbsp;<span class="chip-pip pip-r">7</span>
+      &nbsp;<span>B</span>:&nbsp;<span class="chip-pip pip-b">2</span>
+    </div>
+    <div class="class-chip-row">
+      <span>G</span>:&nbsp;<span class="chip-pip pip-g">3</span>
+      &nbsp;<span>K</span>:&nbsp;<span class="chip-pip pip-k">1</span>
+    </div>
+    <div class="class-flavor">Chaos and attrition. Wild dice in physical confrontations. Recovers White chips by winning exchanges.</div>
+  </div>
+
+  <div class="class-card diamonds-card">
+    <div class="class-name">Seer</div>
+    <div><span class="class-suit-badge diamonds-badge-bg">♦ DIAMONDS</span></div>
+    <div class="class-honor honor-pos">Honor +2</div>
+    <div class="class-chip-row">
+      <span>W</span>:&nbsp;<span class="chip-pip pip-w">10</span>
+      &nbsp;<span>R</span>:&nbsp;<span class="chip-pip pip-r">7</span>
+      &nbsp;<span>B</span>:&nbsp;<span class="chip-pip pip-b">5</span>
+    </div>
+    <div class="class-chip-row">
+      <span>G</span>:&nbsp;<span class="chip-pip pip-g">3</span>
+      &nbsp;<span>K</span>:&nbsp;<span class="chip-pip pip-k">2</span>
+    </div>
+    <div class="class-flavor">Fate manipulation and Rift reading. Only class with Wild Card access. Recovers Blue chips through correct predictions.</div>
+  </div>
+
+  <div class="class-card diamonds-card">
+    <div class="class-name">Drifter</div>
+    <div><span class="class-suit-badge diamonds-badge-bg">♦ DIAMONDS</span></div>
+    <div class="class-honor honor-neg">Notorious −2</div>
+    <div class="class-chip-row">
+      <span>W</span>:&nbsp;<span class="chip-pip pip-w">11</span>
+      &nbsp;<span>R</span>:&nbsp;<span class="chip-pip pip-r">8</span>
+      &nbsp;<span>B</span>:&nbsp;<span class="chip-pip pip-b">4</span>
+    </div>
+    <div class="class-chip-row">
+      <span>G</span>:&nbsp;<span class="chip-pip pip-g">5</span>
+      &nbsp;<span>K</span>:&nbsp;<span class="chip-pip pip-k">1</span>
+    </div>
+    <div class="class-flavor">Movement and escape. Redraws through repositioning. Recovers Red chips by slipping out of danger.</div>
+  </div>
+</div>
+
+<hr class="section-divider">
+
+<!-- ◈◈ CHAPTER 3: CHIPS ◈◈ -->
+<div class="chapter-label">Chapter Three</div>
+<h2>The Stack — Poker Chip Economy</h2>
+
+<div class="flavour">"Everyone at the table puts something in. The house always takes its cut. The Rift doesn't care if you're broke — but it notices when you're flush."</div>
+
+<p>Five colors of chips track your current state. They are physical objects that move across the table in real time. A standard poker set provides exactly these five colors — no additional tokens needed. Chips are gained, lost, and transferred between players. Running out of White means you're down. Running up on Black means something is coming for you.</p>
+
+<div class="chip-grid">
+  <div class="chip-card">
+    <div class="chip-visual wchip"><div class="chip-inner">W</div></div>
+    <div style="flex:1">
+      <div class="chip-name">White — Grit</div>
+      <div class="chip-aka">Health · Stamina · Physical Resilience</div>
+      <div class="chip-desc">Your body. Lose one per hit in a Duel or Shootout. At zero you are <strong>Downed</strong>. Restored by Rest scenes (+3) or Doctor abilities. Refreshes to your class maximum at session start.</div>
+      <div class="chip-spend"><strong>Spend 1 White</strong> to shrug off a Grazed wound — narrate it as a clean miss. <strong>Spend 2 White</strong> to reenter a scene after being Downed, with 2 White remaining.</div>
+    </div>
+  </div>
+
+  <div class="chip-card">
+    <div class="chip-visual rchip"><div class="chip-inner">R</div></div>
+    <div style="flex:1">
+      <div class="chip-name">Red — Nerve</div>
+      <div class="chip-aka">Courage · Morale · Will to Continue</div>
+      <div class="chip-desc">Your nerve. Lost when you witness something terrible, fail a social gambit badly, or are publicly humiliated. At zero you <strong>Break</strong> — you cannot initiate any action next scene. Does <em>not</em> refresh at session start; must be earned back through play.</div>
+      <div class="chip-spend"><strong>Spend 1 Red</strong> to attempt a Quick Draw without sacrificing your card hand. <strong>Spend 1 Red</strong> to resist a Charlatan or Seer compulsion effect.</div>
+    </div>
+  </div>
+
+  <div class="chip-card">
+    <div class="chip-visual bchip"><div class="chip-inner">B</div></div>
+    <div style="flex:1">
+      <div class="chip-name">Blue — Luck</div>
+      <div class="chip-aka">Fortune · The Favor of the Rift</div>
+      <div class="chip-desc">Pure luck — rare and not restored passively. Earned through great narration, risky plays that pay off, or GM award. The GM awards Blue chips when the table delivers a moment worth remembering.</div>
+      <div class="chip-spend"><strong>Spend 1 Blue</strong> to reroll any single die after the final reveal — before consequences are applied. <strong>Spend 2 Blue</strong> to survive what should have killed you. Once per session: you are Downed but not dead.</div>
+    </div>
+  </div>
+
+  <div class="chip-card">
+    <div class="chip-visual gchip"><div class="chip-inner">G</div></div>
+    <div style="flex:1">
+      <div class="chip-name">Green — Coin</div>
+      <div class="chip-aka">Money · Barter · Social Standing</div>
+      <div class="chip-desc">Wealth and reputation — the same thing on the Frontier. The <strong>only chip that transfers freely between players</strong>. Spent on gear, bribes, information, and gambling antes. Won in poker hands and heists. Lost through bad deals and failed cons.</div>
+      <div class="chip-spend"><strong>Spend 3 Green</strong> to hire a Grunt NPC for one scene. <strong>Spend 5 Green</strong> to obtain Veteran-tier information. <strong>Ante Green</strong> in any gambling scene — winner takes the pot.</div>
+    </div>
+  </div>
+
+  <div class="chip-card">
+    <div class="chip-visual kchip"><div class="chip-inner">✦</div></div>
+    <div style="flex:1">
+      <div class="chip-name">Black — Rift Debt</div>
+      <div class="chip-aka">The Price · Void Marks · What You Owe</div>
+      <div class="chip-desc">You <em>gain</em> these — they are a liability. Acquired by interacting with dimensional forces, using certain card abilities, and triggering Rift events. At <strong>5 Black chips</strong>, the GM introduces a Rift Collector — an entity that arrives to collect. Black chips cannot be lost through rest or normal play. They must be <em>shed</em>.</div>
+      <div class="chip-spend"><strong>Shed 1 Black</strong> by completing a Crossroads scene that costs you something real. <strong>Shed 3 Black</strong> by defeating your Rift Collector in a Duel. <strong>Never recover Black through rest</strong> — the debt doesn't sleep.</div>
+    </div>
+  </div>
+</div>
+
+<h3>The GM's Fate Chips</h3>
+<p>The GM does not use the five player chip colors. Instead the GM holds a single pool of <strong>Fate Chips</strong> — a neutral color marker (coins, stones, or a sixth color if available). The GM starts each session with zero Fate Chips and builds them through play.</p>
+
+<div class="rule-box gold-box">
+  <h4>The GM Is the House</h4>
+  <p>The GM does not roll dice against players. Instead, the GM <strong>sets stakes</strong> by placing Fate Chips in the center of the table. To attempt a consequential action, a player must match the Fate Chips with chips of their own — committing resources before the dice are thrown.</p>
+  <table>
+    <tr><th>Fate Chips Placed</th><th>Difficulty</th><th>Required Hand</th><th>Example Stake</th></tr>
+    <tr><td>1 chip</td><td>Easy</td><td>Two Pair or better</td><td>Picking a drunk's lock, bluffing a Grunt</td></tr>
+    <tr><td>2 chips</td><td>Moderate</td><td>Three of a Kind</td><td>Disarming a trap, persuading a Veteran NPC</td></tr>
+    <tr><td>3 chips</td><td>Hard</td><td>Full House</td><td>Cracking a Cogwright vault, surviving an ambush</td></tr>
+    <tr><td>4 chips</td><td>Very Hard</td><td>Four of a Kind</td><td>Facing a Legend NPC, sealing a minor Rift</td></tr>
+    <tr><td>5 chips</td><td>Legendary</td><td>Five of a Kind</td><td>Surviving a Rift Collector alone</td></tr>
+  </table>
+  <p style="font-size:.8rem;margin-top:.5rem;">The GM chooses <em>which type</em> of chip the player must match. Demanding White chips means physical cost. Demanding Red means nerve. Demanding Black means only the willing to acquire Rift Debt may attempt this.</p>
+</div>
+
+<div class="rule-box">
+  <h4>How the GM Earns Fate Chips</h4>
+  <p>Every time a player <strong>redraws cards</strong> (through a class ability or any mechanic that refills their Persistent Hand), the GM gains <strong>1 Fate Chip</strong>. This is the closed loop at the heart of the game: players need better cards to win, but getting better cards feeds the GM.</p>
+  <p>The GM spends Fate Chips to <strong>redraw their own card hand</strong> (3 chips per full redraw) and to activate certain GM face card abilities.</p>
+</div>
+
+<hr class="section-divider">
+
+<!-- ◈◈ CHAPTER 4: DICE ◈◈ -->
+<div class="chapter-label">Chapter Four</div>
+<h2>The Poker Dice System</h2>
+
+<p>All resolution uses <strong>five poker dice</strong> — each face showing 9, 10, J, Q, K, A. Build the best poker hand you can across up to three rolls by locking dice between throws. The hand ranking determines the outcome. Only roll when failure has a real consequence.</p>
+
+<div class="rule-box">
+  <h4>The Roll Sequence</h4>
+  <div class="flow">
+    <div class="flow-step"><div class="flow-num">1</div><div class="flow-text"><strong>Declare Stakes.</strong> Name what you're risking and what you want. The GM sets Fate Chips. You decide whether to match them or walk away.</div></div>
+    <div class="flow-step"><div class="flow-num">2</div><div class="flow-text"><strong>Roll All Five.</strong> Throw your full pool. Assess your hand.</div></div>
+    <div class="flow-step"><div class="flow-num">3</div><div class="flow-text"><strong>Lock &amp; Reroll.</strong> Lock any dice — they stay face-up and don't reroll. Roll the rest. Repeat once more for a maximum of three rolls total.</div></div>
+    <div class="flow-step"><div class="flow-num">4</div><div class="flow-text"><strong>Final Hand.</strong> Locked + final rolled dice form your hand. Compare to the required threshold or opponent's hand.</div></div>
+    <div class="flow-step"><div class="flow-num teal">→</div><div class="flow-text"><strong>Narrate.</strong> Winner narrates first. Loser responds. In ties, both narrate simultaneously — chaos ensues.</div></div>
+  </div>
+</div>
+
+<h3>Hand Rankings</h3>
+<p>Note: With only six die faces (9 through A), <strong>only two Straights are possible</strong>: 9-10-J-Q-K and 10-J-Q-K-A. This makes Straights rare and valuable — the gambler's hand, difficult to build deliberately.</p>
+
+<div class="hand-section">
+  <div class="hand-title">♦ &nbsp; Poker Dice Hands — High to Low &nbsp; ♦</div>
+  <div class="hand-ranking">
+    <div class="hand-row">
+      <div class="hand-rank">1</div>
+      <div class="hand-name">Five of a Kind</div>
+      <div class="hand-dice"><div class="die locked">A</div><div class="die locked">A</div><div class="die locked">A</div><div class="die locked">A</div><div class="die locked">A</div></div>
+      <div class="hand-pct">~4%</div>
+      <div class="hand-effect">Legendary. The Frontier bends to your will.</div>
+    </div>
+    <div class="hand-row">
+      <div class="hand-rank">2</div>
+      <div class="hand-name">Four of a Kind</div>
+      <div class="hand-dice"><div class="die locked">K</div><div class="die locked">K</div><div class="die locked">K</div><div class="die locked">K</div><div class="die">9</div></div>
+      <div class="hand-pct">~25%</div>
+      <div class="hand-effect">Decisive win. Opponent takes full consequence.</div>
+    </div>
+    <div class="hand-row">
+      <div class="hand-rank">3</div>
+      <div class="hand-name">Full House</div>
+      <div class="hand-dice"><div class="die locked">Q</div><div class="die locked">Q</div><div class="die locked">Q</div><div class="die">J</div><div class="die">J</div></div>
+      <div class="hand-pct">~42%</div>
+      <div class="hand-effect">Strong win. Opponent suffers with a complication.</div>
+    </div>
+    <div class="hand-row">
+      <div class="hand-rank">4</div>
+      <div class="hand-name">Straight ♦</div>
+      <div class="hand-dice"><div class="die">9</div><div class="die">10</div><div class="die">J</div><div class="die">Q</div><div class="die">K</div></div>
+      <div class="hand-pct">rare</div>
+      <div class="hand-effect">The gambler's hand. Clean win + 1 Blue chip.</div>
+    </div>
+    <div class="hand-row">
+      <div class="hand-rank">5</div>
+      <div class="hand-name">Three of a Kind</div>
+      <div class="hand-dice"><div class="die locked">J</div><div class="die locked">J</div><div class="die locked">J</div><div class="die">9</div><div class="die">Q</div></div>
+      <div class="hand-pct">~69%</div>
+      <div class="hand-effect">Marginal win. Partial consequence only.</div>
+    </div>
+    <div class="hand-row">
+      <div class="hand-rank">6</div>
+      <div class="hand-name">Two Pair</div>
+      <div class="hand-dice"><div class="die locked">10</div><div class="die locked">10</div><div class="die">K</div><div class="die locked">9</div><div class="die locked">9</div></div>
+      <div class="hand-pct">~95%</div>
+      <div class="hand-effect">Narrow win. Both sides pay a price.</div>
+    </div>
+    <div class="hand-row">
+      <div class="hand-rank">7</div>
+      <div class="hand-name">One Pair</div>
+      <div class="hand-dice"><div class="die locked">A</div><div class="die locked">A</div><div class="die">9</div><div class="die">J</div><div class="die">Q</div></div>
+      <div class="hand-pct">~100%</div>
+      <div class="hand-effect">Stalemate with a lean. Narrator picks the cost.</div>
+    </div>
+    <div class="hand-row" style="opacity:.6">
+      <div class="hand-rank">—</div>
+      <div class="hand-name">High Card</div>
+      <div class="hand-dice"><div class="die">A</div><div class="die">J</div><div class="die">9</div><div class="die">10</div><div class="die">Q</div></div>
+      <div class="hand-pct">&lt;1%</div>
+      <div class="hand-effect">Loss. Opponent narrates freely.</div>
+    </div>
+  </div>
+  <p style="font-size:.7rem;color:#806040;margin-top:1rem;text-align:center;font-style:italic;">Percentages show cumulative probability of achieving this hand or better with 3 rolls using optimal locking. ♦ Straight awards 1 Blue chip on success — the Frontier rewards rare discipline.</p>
+</div>
+
+<h3>Dice Modifiers — The Four Mechanics</h3>
+<p>These four mechanics can be accessed by any class, but what <em>triggers</em> them depends on your class and the cards you hold. The trigger is class-specific; the mechanic is universal.</p>
+
+<div class="rule-box">
+  <h4><span class="kw kw-teal">LOCK</span> — Pre-Roll Certainty</h4>
+  <p>Declare one or more dice values <em>before rolling</em>. Place those dice face-up showing the declared value. They are locked from the start — you chose your outcome before chance had a word. Locked dice from this ability cannot be unlocked.</p>
+  <p style="font-size:.82rem;color:var(--rust);font-style:italic;">Naturally suits: Gunslinger (precision), Cogwright (preparation). Available to all classes through the right card ability or situation.</p>
+</div>
+
+<div class="rule-box">
+  <h4><span class="kw kw-teal">WILD DIE</span> — Post-Roll Manipulation</h4>
+  <p>After your final roll, nominate one die and set it to any face value you choose. Unlike a Lock, this happens <em>after</em> you see your results. You're fixing what went wrong, not preventing it.</p>
+  <p style="font-size:.82rem;color:var(--rust);font-style:italic;">Naturally suits: Brawler (chaotic adaptation), Charlatan (misdirection). Available to all through specific card triggers.</p>
+</div>
+
+<div class="rule-box">
+  <h4><span class="kw kw-teal">REROLL</span> — Extra Chances</h4>
+  <p>The standard sequence gives you three rolls. <strong>Discard a number card (2–10) from your Persistent Hand matching the suit of your current action</strong> to gain one additional reroll. Any matching-suit number card grants exactly one reroll regardless of its value — a 2 and a 10 both grant one reroll. You may do this multiple times per roll sequence by discarding multiple cards.</p>
+  <p>Face cards out of class cannot be discarded for rerolls — they must be passed left or held.</p>
+</div>
+
+<div class="rule-box ghost-box">
+  <h4><span class="kw kw-purple">WILD CARD</span> — Rift Exclusive</h4>
+  <p>When a Wild Card is declared, one specific die value (chosen by the Seer or GM) becomes equal to Ace for the remainder of the scene. Every player's hand — and every NPC's — is affected simultaneously. A hand full of Threes suddenly beats a hand full of Kings.</p>
+  <p>Wild Card access is <strong>exclusive to the Seer and the GM</strong>. The Seer must discard a Diamond face card to declare it. The GM spends 2 Fate Chips. The Chaos Track gains 1. Wild Cards cannot be countered.</p>
+</div>
+
+<h3>Locking Between Rolls</h3>
+<div class="rule-box">
+  <h4>Standard Lock Rules</h4>
+  <p>Between any two rolls, you may lock any number of dice by placing them face-up. Locked dice are not rerolled. You may unlock a die before your second roll only — once you begin your third roll, all locked dice are permanent. Locking all five dice ends your turn early with your current hand.</p>
+</div>
+
+<div class="rule-box blood-box">
+  <h4><span class="kw kw-red">BUST</span> — The Gambler's Risk</h4>
+  <p>After your second roll, declare a Bust: discard all locked dice and roll all five fresh. If your new hand beats your discarded hand, gain 1 Blue chip — luck rewarded. If it doesn't, your opponent acts first automatically, and you lose 2 White chips from the physical or emotional whiplash. The Frontier punishes gambling that doesn't pay.</p>
+</div>
+
+<hr class="section-divider">
+
+<!-- ◈◈ CHAPTER 5: PERSISTENT HAND ◈◈ -->
+<div class="chapter-label">Chapter Five</div>
+<h2>The Persistent Hand — Your Secret Five</h2>
+
+<div class="flavour">"Nobody said a word. The Cogwright slid one card left without looking up. The Charlatan palmed it, her expression unchanged. Somewhere across the table, the Gunslinger understood something had changed."</div>
+
+<p>At session start, deal every player — and the GM — <strong>five cards</strong> from a shuffled double deck (104 cards). This is their Persistent Hand, held privately all session. Cards are spent, passed, and burned. They are never shown. They are never discussed. What you hold is yours alone until you choose otherwise.</p>
+
+<h3>The Three Card Laws</h3>
+
+<div class="rule-box gold-box">
+  <h4>Law 1 — Secrecy</h4>
+  <p>Never show your cards. Never describe them verbally. Not the suits, not the values, not how many of a kind. <em>Meaningful glances are permitted. Sighing is permitted. Sliding a card toward someone you trust is permitted. Truth about your hand is not.</em></p>
+  <p>You may express a need — "someone pass a card to the Doctor" — but you may not describe what you're passing or why in mechanical terms.</p>
+</div>
+
+<div class="rule-box gold-box">
+  <h4>Law 2 — The Pass</h4>
+  <p>Once per scene, pass one card face-down to the player on your <strong>left only</strong>. They must accept it and add it to their hand. They then discard one card face-down to the bottom of the deck to return to five cards. They choose which to discard. You cannot pass right, across, or back. Passing is always optional — holding all session is a valid and lonely strategy.</p>
+</div>
+
+<div class="rule-box gold-box">
+  <h4>Law 3 — The Discard Economy</h4>
+  <p><strong>Number cards (2–10) of your class suit:</strong> Discard to trigger a class ability (see Chapter Six) or to gain one reroll on a matching-suit action.<br>
+  <strong>Number cards (2–10) out of class suit:</strong> Discard during a matching-suit action to gain one reroll. A 3 of Clubs is still one reroll for a non-Brawler when she's in a brawl.<br>
+  <strong>Face cards (J/Q/K/A) of your class suit:</strong> Trigger powerful class abilities. Cannot be discarded for simple rerolls — they are worth too much.<br>
+  <strong>Face cards out of class suit:</strong> Cannot be discarded for rerolls. Must be passed left or held for the Resonance mechanic. These are someone else's treasure.</p>
+</div>
+
+<h3>The Pass in Practice</h3>
+
+<div class="pass-diagram">
+  <div class="pass-player">Doctor<div class="pass-hand">♥♥♥J♦ ?</div></div>
+  <div class="pass-arrow">→ passes one card →</div>
+  <div class="pass-player">Gunslinger<div class="pass-hand">♠♠♠♣♦?</div></div>
+  <div class="pass-arrow">→ passes one card →</div>
+  <div class="pass-player">Brawler<div class="pass-hand">♣♣♣♥♦ ?</div></div>
+  <div class="pass-arrow">→ passes one card →</div>
+  <div class="pass-player">Seer<div class="pass-hand">♦♦♦♦♥?</div></div>
+</div>
+
+<div class="example-block">
+  <div class="example-label">Table Moment</div>
+  <p>Vera (Seer) is sitting on four Diamonds and an off-suit Seven. She needs one more Diamond to trigger her 5-Diamond class ability. She can't say so. She passes the Seven left to Cal (Gunslinger) — a useless card for her, neutral for him. Cal knows she passed something she didn't want. He has a Diamond in his hand. He passes it to Vera next scene. She doesn't know what's coming. When it lands, she has her five Diamonds. She doesn't react. She doesn't have to.</p>
+</div>
+
+<h3>Recharge — Drawing Back to Five</h3>
+<p>You do not automatically redraw after spending cards. Your hand shrinks as you spend. <strong>Recharge is a class ability</strong> — some classes have it, some don't, some can grant it to teammates. When you recharge, you draw cards from the Frontier Deck until you hold five again. Every card you draw triggers 1 Fate Chip for the GM.</p>
+
+<div class="rule-box ghost-box">
+  <h4>The Double Deck — Resonance</h4>
+  <p>With 104 cards, the same card exists twice. If two players reveal or discard the same card simultaneously, <strong>Resonance</strong> triggers: both players' class effects fire at full strength regardless of their current suit majority, both gain 1 Blue chip, and the Chaos Track gains 1. The duplicate shouldn't exist. The Frontier notices.</p>
+  <p style="font-size:.8rem;margin-top:.5rem;color:var(--rust);font-style:italic;">Opening hand probability: ~34% chance of holding at least one face card of your class suit. ~10% chance of having suit majority (3+ cards of your suit) for a class trigger. The Pass mechanic exists precisely because you usually don't start with what you need.</p>
+</div>
+
+<hr class="section-divider">
+
+<!-- ◈◈ CHAPTER 6: CLASS ABILITIES ◈◈ -->
+<div class="chapter-label">Chapter Six</div>
+<h2>Class Abilities — What Your Cards Do</h2>
+
+<p>Class abilities trigger from cards in your Persistent Hand. Number cards (2–10) of your suit trigger scaled abilities based on the action context. Face cards trigger named abilities that are qualitatively different — not just stronger, but accessing angles number cards cannot reach.</p>
+
+<p>All classes can access Rerolls, Locks, and Wild Dice through the right situation and cards. What differs is <em>when and why</em> each class can access them, and what their face cards specifically unlock.</p>
+
+<h3>♥ Hearts Classes</h3>
+
+<div class="rule-box">
+  <h4>Doctor — Suit: Hearts | Honor +2</h4>
+  <p><strong>Core Ability — Treat:</strong> Discard any Hearts number card targeting an ally to restore White chips equal to the card's context tier: low cards (2–5) restore 1 White, mid cards (6–9) restore 2 White, 10 restores 3 White. The Doctor is the only class that restores White chips through card play outside of Rest scenes.</p>
+  <p><strong>Recharge Ability — Field Medicine:</strong> After successfully treating an ally (restoring any White chips), the Doctor may draw 1 card from the Frontier Deck. This is the primary recharge trigger — helping others fills your hand.</p>
+  <p><strong>Teammate Recharge:</strong> Discard a Hearts face card to allow one ally to draw cards back up to five. This costs the Doctor a powerful card. The GM gains Fate Chips equal to the cards drawn.</p>
+  <table>
+    <tr><th>Face Card</th><th>Named Ability</th></tr>
+    <tr><td>J♥</td><td><em>Stabilize:</em> An ally at zero White is not Downed this scene. They remain at 1 White until scene end. Cannot be used on yourself.</td></tr>
+    <tr><td>Q♥</td><td><em>Diagnosis:</em> Name a condition affecting any character. The GM must confirm or deny it truthfully. Lock one die on your next roll as the action becomes clearer.</td></tr>
+    <tr><td>K♥</td><td><em>Full Recovery:</em> One ally restores their White chips to their class maximum immediately. The Doctor gains 1 Black chip — extraordinary intervention has a price.</td></tr>
+    <tr><td>A♥</td><td><em>Miracle:</em> Reverse one consequence that occurred this scene — a wound, a lost chip, a failed roll's result. The moment unhappens. Chaos Track +2.</td></tr>
+  </table>
+</div>
+
+<div class="rule-box">
+  <h4>Charlatan — Suit: Hearts | Notorious −2</h4>
+  <p><strong>Core Ability — Performance:</strong> Discard any Hearts number card during a social action to force one target to reroll their highest die. The performance creates doubt, hesitation, a crack in their confidence. The Charlatan turns the opponent's strength against them.</p>
+  <p><strong>Recharge Ability — The Take:</strong> After successfully conning a target out of Green chips or information, draw 1 card. Success feeds the next performance.</p>
+  <p><strong>Wild Die Access:</strong> In any scene where the Charlatan has established a false identity or cover story, they may access a Wild Die by discarding any Hearts card — adjusting their final roll to match the persona they've built.</p>
+  <table>
+    <tr><th>Face Card</th><th>Named Ability</th></tr>
+    <tr><td>J♥</td><td><em>The Sob Story:</em> One target cannot spend Red chips this scene. Their nerve is compromised by manufactured sympathy.</td></tr>
+    <tr><td>Q♥</td><td><em>Snake Oil:</em> Sell a false solution. Target gains 2 White chips now but loses 3 White chips at the start of the next scene when it wears off. They don't know which yet.</td></tr>
+    <tr><td>K♥</td><td><em>The Long Con:</em> Establish a false identity that lasts the entire session. While in persona, all social rolls are treated as one hand rank higher. Broken if you take a hit in combat.</td></tr>
+    <tr><td>A♥</td><td><em>The Vanish:</em> Exit any scene instantly without consequence. You were never there. Any chips you've taken this scene remain taken. Gain 1 Black chip — someone saw through it.</td></tr>
+  </table>
+</div>
+
+<h3>♠ Spades Classes</h3>
+
+<div class="rule-box">
+  <h4>Gunslinger — Suit: Spades | Honor +2</h4>
+  <p><strong>Core Ability — Called Shot:</strong> Discard any Spades number card before rolling in a Duel or Shootout to Lock one die to any value of your choice before the roll begins. You declared the shot before you took it.</p>
+  <p><strong>Recharge Ability — Clean Win:</strong> Win a Duel with a Full House or better and draw 1 card. Excellence replenishes discipline.</p>
+  <p><strong>Red Chip Recovery:</strong> Win any Duel decisively (Full House or better) to recover 1 Red chip. Victory restores nerve.</p>
+  <table>
+    <tr><th>Face Card</th><th>Named Ability</th></tr>
+    <tr><td>J♠</td><td><em>Trick Shot:</em> Lock two dice before rolling instead of one. The second lock costs nothing extra.</td></tr>
+    <tr><td>Q♠</td><td><em>Read the Room:</em> Before any Duel begins, your opponent must reveal one die they intend to lock this round. You may change one of your locks in response.</td></tr>
+    <tr><td>K♠</td><td><em>The Reputation:</em> Name a consequence before rolling. If your hand wins by two ranks or more, that consequence applies immediately without narration — it simply happens, everyone understands why.</td></tr>
+    <tr><td>A♠</td><td><em>The Legend:</em> Roll 6 dice this Duel and drop the lowest. Once per session.</td></tr>
+  </table>
+</div>
+
+<div class="rule-box">
+  <h4>Bandit — Suit: Spades | Notorious −2</h4>
+  <p><strong>Core Ability — Disrupt:</strong> Discard any Spades number card at any point during an opponent's roll sequence to force them to unlock one currently locked die. Their certainty becomes doubt.</p>
+  <p><strong>Recharge Ability — Five-Finger Discount:</strong> Successfully steal Green chips from any target to draw 1 card. Taking from others fills the hand.</p>
+  <p><strong>Green Chip Recovery:</strong> After any successful ambush or theft, gain Green chips equal to the rank difference in hands (minimum 1).</p>
+  <table>
+    <tr><th>Face Card</th><th>Named Ability</th></tr>
+    <tr><td>J♠</td><td><em>Ambush:</em> This scene, you act before initiative is rolled. You are always first. If another character also has this ability, roll normally between you.</td></tr>
+    <tr><td>Q♠</td><td><em>Inside Job:</em> Name one item, chip type, or piece of information a target is carrying. You take it. No roll required. They notice at scene end.</td></tr>
+    <tr><td>K♠</td><td><em>Smoke and Mirrors:</em> Create a distraction that forces all enemies to reroll their highest die this round. The chaos is everywhere at once.</td></tr>
+    <tr><td>A♠</td><td><em>The Setup:</em> Plant evidence or a trap. At any point later this session, reveal the setup to make one roll automatically succeed without dice. The trap was always there.</td></tr>
+  </table>
+</div>
+
+<h3>♣ Clubs Classes</h3>
+
+<div class="rule-box">
+  <h4>Cogwright — Suit: Clubs | Honor +2</h4>
+  <p><strong>Core Ability — Prepared:</strong> During any scene where the Cogwright has had time to prepare (not in immediate combat), discard any Clubs number card to Lock one die before rolling. The preparation was the work — the roll is just confirming it.</p>
+  <p><strong>Recharge Ability — Salvage:</strong> After successfully modifying, repairing, or building something during a scene, draw 1 card. The work fills the mind.</p>
+  <p><strong>Green Chip Recovery:</strong> Sell a working device or modification to gain Green chips equal to the scene complexity (GM determines: 1–4 chips).</p>
+  <table>
+    <tr><th>Face Card</th><th>Named Ability</th></tr>
+    <tr><td>J♣</td><td><em>Overclock:</em> One ally's mechanical device or weapon improves for this scene — they may Lock one die before their next roll at no card cost.</td></tr>
+    <tr><td>Q♣</td><td><em>Structural Analysis:</em> Identify the exact value rating of any Cover Card before it's revealed. Plan accordingly.</td></tr>
+    <tr><td>K♣</td><td><em>Invention:</em> Create a one-use device that replicates any basic class ability from any class. Describe what you built. It works once.</td></tr>
+    <tr><td>A♣</td><td><em>The Machine:</em> Build or activate something that changes the scene permanently — a locked door that can't be breached, a steam-powered weapon that fires every round, a bridge that wasn't there. The GM cannot remove it this session.</td></tr>
+  </table>
+</div>
+
+<div class="rule-box">
+  <h4>Brawler — Suit: Clubs | Notorious −2</h4>
+  <p><strong>Core Ability — Wild Swing:</strong> In any physical confrontation (Bar Brawl, Shootout, or physical Duel), discard any Clubs card to access a Wild Die — setting one die to any value after rolling. The Brawler doesn't aim. They adjust.</p>
+  <p><strong>Recharge Ability — Standing:</strong> Win any physical exchange (any roll in a Bar Brawl or Shootout where your hand beats the opponent's) to recover 1 White chip and draw 1 card. Winning hurts less than losing.</p>
+  <p><strong>White Chip Recovery:</strong> The Brawler's primary chip recovery is through winning. Each physical win restores 1 White. This makes attrition their meta-game — they win by outlasting.</p>
+  <table>
+    <tr><th>Face Card</th><th>Named Ability</th></tr>
+    <tr><td>J♣</td><td><em>Haymaker:</em> This hit cannot be negated by White chip spend or card play. It lands. Period.</td></tr>
+    <tr><td>Q♣</td><td><em>Take a Hit:</em> Absorb damage meant for an adjacent ally. They take nothing. You take the hit plus 1 extra White chip damage — but you're still standing (probably).</td></tr>
+    <tr><td>K♣</td><td><em>Last Stand:</em> At zero White chips, make one final roll before going Down. If you achieve Three of a Kind or better, recover 3 White chips. If you don't, you fall. No in-between.</td></tr>
+    <tr><td>A♣</td><td><em>Unstoppable:</em> For this round, nothing stops your next physical action. No chips, cards, or abilities can prevent it. The Brawler is simply a force of nature for one moment.</td></tr>
+  </table>
+</div>
+
+<h3>♦ Diamonds Classes</h3>
+
+<div class="rule-box">
+  <h4>Seer — Suit: Diamonds | Honor +2</h4>
+  <p><strong>Core Ability — Read the Thread:</strong> Discard any Diamonds card (not just face cards) to attempt a Rift Reading — asking the GM one yes/no question about what's about to happen in the scene. The GM must answer truthfully. Higher card value refines the reading: low cards (2–5) get approximate answers, mid cards (6–9) get clear answers, 10 gets an answer plus one detail.</p>
+  <p><strong>Wild Card Access:</strong> Discard a Diamonds face card to declare a Wild Card — one die value becomes Ace for the scene. Only the Seer can do this among players.</p>
+  <p><strong>Recharge Ability — Correct Prediction:</strong> If a Seer publicly predicts an outcome before a roll and the dice confirm it, draw 1 card. Being right is its own reward.</p>
+  <table>
+    <tr><th>Face Card</th><th>Named Ability</th></tr>
+    <tr><td>J♦</td><td><em>Glimpse:</em> Look at the top 3 cards of the Frontier Deck. Return them in any order.</td></tr>
+    <tr><td>Q♦</td><td><em>Foresight:</em> Name a specific hand rank. If any player (including the GM) rolls that exact rank this scene, you gain 2 Blue chips — you saw it coming.</td></tr>
+    <tr><td>K♦</td><td><em>Rewrite:</em> After any roll result is announced, change the outcome by one hand rank in either direction. The dice said one thing. The Seer says another.</td></tr>
+    <tr><td>A♦</td><td><em>The Vision:</em> Stop the scene. Every character at the table experiences a shared vision of one possible future — described by the Seer. It may or may not come true. Chaos Track +2. The Seer gains 1 Black chip for seeing too clearly.</td></tr>
+  </table>
+</div>
+
+<div class="rule-box">
+  <h4>Drifter — Suit: Diamonds | Notorious −2</h4>
+  <p><strong>Core Ability — Phase:</strong> Discard any Diamonds number card to move to any position in the current scene — including occupied Cover positions. The current occupant is displaced to open ground. No roll required for the movement itself.</p>
+  <p><strong>Recharge Ability — Clean Exit:</strong> Successfully escape or avoid a direct confrontation (getting away without a hit) to draw 1 card and recover 1 Red chip. Running is its own skill.</p>
+  <p><strong>Red Chip Recovery:</strong> Every clean escape recovers 1 Red chip. The Drifter's nerve is maintained by never getting caught.</p>
+  <table>
+    <tr><th>Face Card</th><th>Named Ability</th></tr>
+    <tr><td>J♦</td><td><em>Not There:</em> Retroactively declare you were not in your stated position this round. One attack that targeted you missed — you were elsewhere. Cannot be used if you already acted this round.</td></tr>
+    <tr><td>Q♦</td><td><em>Someone Else's Problem:</em> Transfer one active consequence (a wound, a chip debt, a pursued status) from yourself to any NPC in the scene. They now have your problem.</td></tr>
+    <tr><td>K♦</td><td><em>Between Worlds:</em> Exit the scene and reenter at any point later this session at a location of your choosing, with full knowledge of what occurred while you were gone.</td></tr>
+    <tr><td>A♦</td><td><em>Rift Step:</em> You and up to one ally step through a Rift and reappear anywhere in the current scene or in the adjacent scene. Chaos Track +2. Gain 2 Black chips. The Frontier noticed the shortcut.</td></tr>
+  </table>
+</div>
+
+<hr class="section-divider">
+
+<!-- ◈◈ CHAPTER 7: RIFT READING ◈◈ -->
+<div class="chapter-label">Chapter Seven</div>
+<h2>The Rift — Reading Dimensional Signs</h2>
+
+<div class="flavour">"The card came up Diamond. Not his class. Not his suit. But it was an Ace and the Rift was right there and he understood, for a moment, what the crackle in the air was saying."</div>
+
+<p>Any character may attempt to read a dimensional Rift — to draw meaning from the tears in reality that scar the Frontier. But only certain people can reliably do so. The Rift doesn't care about your courage or your skill. It cares whether you can hear it.</p>
+
+<div class="rule-box ghost-box">
+  <h4>Who Can Read the Rift</h4>
+  <p><strong>Seer:</strong> May attempt a Rift Reading with any Diamond card from their Persistent Hand. The full value range (2 through Ace) is available. This is the Seer's core identity.</p>
+  <p><strong>All other classes:</strong> May only attempt a Rift Reading if they hold a <em>face card of Diamonds</em> (J♦, Q♦, K♦, or A♦) in their Persistent Hand. The face card represents an unusually strong moment of dimensional sensitivity — rare, unpredictable, and costly.</p>
+</div>
+
+<table>
+  <tr><th>Card Used</th><th>Who Can Use</th><th>Reading Result</th></tr>
+  <tr><td>J♦</td><td>Anyone</td><td>A fragment — an image, a word, a feeling. One vague true thing from the GM.</td></tr>
+  <tr><td>Q♦</td><td>Anyone</td><td>A partial reading — a direction, a warning, an incomplete name. Useful but incomplete.</td></tr>
+  <tr><td>K♦</td><td>Anyone</td><td>A clear vision — specific, actionable information about the Rift or what moves through it.</td></tr>
+  <tr><td>A♦</td><td>Anyone</td><td>Full sight — complete information, but the Rift sees you back. Gain the answer AND 2 Black chips.</td></tr>
+  <tr><td>2♦–10♦</td><td>Seer only</td><td>Same as J♦ for 2–5; same as Q♦ for 6–9; same as K♦ for 10.</td></tr>
+</table>
+
+<p>Reading the Rift always requires discarding the card used — the insight burns the moment it's received. Non-Seer characters who attempt a reading also gain 1 Black chip regardless of card value. The Rift charges for unsanctioned access.</p>
+
+<hr class="section-divider">
+
+<!-- ◈◈ CHAPTER 8: HONOR & NOTORIETY ◈◈ -->
+<div class="chapter-label">Chapter Eight</div>
+<h2>The Scale — Honor &amp; Notoriety</h2>
+
+<p>Every character sits somewhere on a scale from −5 (deeply notorious) to +5 (deeply honorable). Zero is not neutral — it's stagnant. The Frontier rewards commitment to an identity. Players who hedge, who try to be everything, who act honorably when convenient and notoriously when profitable — they stagnate mechanically while committed players advance.</p>
+
+<div class="honor-scale">
+  <div class="scale-labels">
+    <span>← DEEPLY NOTORIOUS</span>
+    <span>STAGNATION ZONE</span>
+    <span>DEEPLY HONORABLE →</span>
+  </div>
+  <div class="scale-bar"></div>
+  <div class="scale-markers">
+    <div class="scale-mark"><div class="scale-mark-val">−5</div><div class="scale-mark-cls">max<br>notorious</div></div>
+    <div class="scale-mark"><div class="scale-mark-val">−2</div><div class="scale-mark-cls">Bandit<br>Charlatan<br>Brawler<br>Drifter</div></div>
+    <div class="scale-mark"><div class="scale-mark-val">0</div><div class="scale-mark-cls">stagnation</div></div>
+    <div class="scale-mark"><div class="scale-mark-val">+2</div><div class="scale-mark-cls">Gunslinger<br>Doctor<br>Cogwright<br>Seer</div></div>
+    <div class="scale-mark"><div class="scale-mark-val">+5</div><div class="scale-mark-cls">max<br>honor</div></div>
+  </div>
+</div>
+
+<h3>XP and the Scale</h3>
+<table>
+  <tr><th>Scale Position</th><th>XP Per Session</th><th>Why</th></tr>
+  <tr><td>−5 to −3 (deeply notorious)</td><td>5 XP</td><td>Fully committed. The Frontier knows who you are.</td></tr>
+  <tr><td>−2 (class notorious home)</td><td>4 XP</td><td>Leaning in. Living the identity.</td></tr>
+  <tr><td>−1 to +1 (stagnation zone)</td><td>3 XP</td><td>Between identities. The Frontier doesn't know what to make of you.</td></tr>
+  <tr><td>+2 (class honor home)</td><td>4 XP</td><td>Leaning in. Living the code.</td></tr>
+  <tr><td>+3 to +5 (deeply honorable)</td><td>5 XP</td><td>Fully committed. People know your name for the right reasons.</td></tr>
+</table>
+
+<div class="rule-box">
+  <h4>Spending XP</h4>
+  <p><strong>New class ability (within your current class):</strong> 10–15 XP depending on power tier. Early abilities cost 10. Advanced abilities cost 15.<br>
+  <strong>Class transition:</strong> 20 XP plus a narrative threshold moment — a scene where the change is earned in fiction, not just on a character sheet.<br>
+  <strong>Abilities are permanent.</strong> You don't lose old class abilities when you transition. The retired Bandit who became a Doctor still knows how to disrupt a roll and take from others. They just also know how to heal.</p>
+</div>
+
+<h3>Class Transitions</h3>
+<p>To transition to a new class, your scale position must reach that class's home position or beyond. Transitioning from Bandit (−2) to Doctor (+2) requires your scale to reach +2 — a four-point journey through the stagnation zone where you earn only 3 XP per session. The stagnation <em>is</em> the transition cost. You are slow because you are changing.</p>
+
+<table>
+  <tr><th>Transition</th><th>Scale Distance</th><th>Stagnation Sessions</th><th>Character Arc</th></tr>
+  <tr><td>Bandit → Brawler</td><td>0 points</td><td>0 — career change only</td><td>Different criminal, same life</td></tr>
+  <tr><td>Gunslinger → Cogwright</td><td>0 points</td><td>0 — career change only</td><td>Trade a gun for a wrench</td></tr>
+  <tr><td>Brawler → Cogwright</td><td>4 points</td><td>~4 sessions of 3 XP</td><td>Violence to structure — full arc</td></tr>
+  <tr><td>Bandit → Doctor</td><td>4 points</td><td>~4 sessions of 3 XP</td><td>The classic redemption story</td></tr>
+</table>
+
+<hr class="section-divider">
+
+<!-- ◈◈ CHAPTER 9: MINIGAMES ◈◈ -->
+<div class="chapter-label">Chapter Nine</div>
+<h2>Minigames — Scene Types</h2>
+
+<p>Everyone can participate in every scene using the base dice rules. Class mechanics are advantages within minigames — not gates to them. The exception: Rift readings require Diamond cards as described in Chapter Seven. Everything else is open to all.</p>
+
+<hr class="section-divider">
+
+<!-- DUEL -->
+<div class="mg-header mg-spades">
+  <div class="mg-label">Minigame One · Spades</div>
+  <div class="mg-title">High Noon — The Duel</div>
+</div>
+
+<div class="flavour">"The street went quiet. The kind of quiet that isn't peaceful — the kind that's waiting."</div>
+
+<p>A Duel is a structured one-on-one contest. Gunslingers and Bandits have the deepest mechanical roots here, but any character can duel. The difference is that a Gunslinger's cards make them terrifying at it.</p>
+
+<div class="flow">
+  <div class="flow-step"><div class="flow-num">1</div><div class="flow-text"><strong>Draw Phase.</strong> Each duelist rolls one die. Higher result chooses whether to go first or second. Ties re-roll. Going first means you lock dice without seeing your opponent's choices.</div></div>
+  <div class="flow-step"><div class="flow-num">2</div><div class="flow-text"><strong>The Hand.</strong> Both parties roll their full three-roll sequence simultaneously, keeping locked dice hidden.</div></div>
+  <div class="flow-step"><div class="flow-num">3</div><div class="flow-text"><strong>Showdown.</strong> Reveal simultaneously. Resolve using the hand ranking table.</div></div>
+  <div class="flow-step"><div class="flow-num">4</div><div class="flow-text"><strong>Wound Track.</strong> Loser loses White chips equal to the rank difference between hands (min 1, max 4 per exchange).</div></div>
+  <div class="flow-step"><div class="flow-num teal">↺</div><div class="flow-text"><strong>Repeat or Resolve.</strong> If both are standing, restart from Draw Phase. Red chips do not restore between rounds of the same Duel.</div></div>
+</div>
+
+<div class="rule-box">
+  <h4>Wound Conditions</h4>
+  <table>
+    <tr><th>White Chips Lost (cumulative)</th><th>Condition</th><th>Mechanical Effect</th></tr>
+    <tr><td>1–2</td><td>Grazed</td><td>Lose 1 card draw on your next recharge</td></tr>
+    <tr><td>3–4</td><td>Winged</td><td>Roll only 4 dice until treated</td></tr>
+    <tr><td>5–6</td><td>Bleeding</td><td>Roll only 3 dice; no card abilities this scene</td></tr>
+    <tr><td>7+</td><td>Downed</td><td>Out of Duel. Opponent decides your fate.</td></tr>
+  </table>
+</div>
+
+<div class="rule-box blood-box">
+  <h4>The Quick Draw</h4>
+  <p>Skip the Draw Phase and go first automatically. Cost: discard your highest Spades card from your Persistent Hand, or spend 1 Red chip if you have no Spades. Roll once, lock what you have, reveal. Win and you narrate a cinematic single shot. Lose by even one rank — take 3 White chip damage immediately. High risk. High drama.</p>
+</div>
+
+<div class="rule-box ghost-box">
+  <h4>The Gambit Card</h4>
+  <p>Before any Duel, each duelist may draw one card from the Frontier Deck as a secret Gambit. Play it at one of three moments — "Before the draw" (add value as a bonus substitutable die result), "On the pull" (force opponent to unlock one locked die), or "At the showdown" (if it matches your class suit, flip the outcome for 2 Black chips). Face cards have named Gambit effects: Jacks distract, Queens read minds, Kings bluff, Aces add a sixth die.</p>
+</div>
+
+<hr class="section-divider">
+
+<!-- SHOOTOUT -->
+<div class="mg-header mg-clubs">
+  <div class="mg-label">Minigame Two · All Classes</div>
+  <div class="mg-title">Lead &amp; Lightning — The Shootout</div>
+</div>
+
+<div class="flavour">"Twelve guns, two sides, one street. The Cogwright dove behind a steam cart. The Drifter was already gone."</div>
+
+<p>Group combat involving three or more active combatants. Unlike the structured Duel, a Shootout is spatial and chaotic — positioning matters, the Chaos Track climbs, and the Frontier can tear open at any moment.</p>
+
+<h3>Initiative — The Spread</h3>
+<p>Every combatant rolls one die. Highest goes first; ties act simultaneously. Each turn: take a <strong>Shot</strong> (roll against one target) or take <strong>Cover</strong> (gain defensive benefits but cannot attack this turn).</p>
+
+<div class="rule-box">
+  <h4>Cover Cards — The Position Game</h4>
+  <p>At scene start the GM draws one card per two combatants (round up) and places them face-down as Cover Positions. Characters claim a position or stand in the open. Cards reveal when first attacked or abandoned.</p>
+  <table>
+    <tr><th>Card Value</th><th>Cover Type</th><th>Benefit</th></tr>
+    <tr><td>2–4</td><td>Thin (barrel, horse, stall)</td><td>Attacker rerolls one die. One-use — destroyed after first hit.</td></tr>
+    <tr><td>5–7</td><td>Solid (wagon, wall, boulder)</td><td>Attacker rolls 4 dice instead of 5.</td></tr>
+    <tr><td>8–10</td><td>Heavy (vault door, locomotive)</td><td>Attacker rolls 3 dice. Survives 3 hits before breaking.</td></tr>
+    <tr><td>J–Q</td><td>Fortified (barricade, raised position)</td><td>Attacker rolls 3 dice; no card abilities this turn.</td></tr>
+    <tr><td>K</td><td>Commanding (high ground, rooftop)</td><td>This character acts first regardless of initiative. Cannot be targeted at range while held.</td></tr>
+    <tr><td>A</td><td>Perfect (sealed room, dimensional fold)</td><td>Cannot be targeted. Only engaged by someone who abandons their own cover to advance.</td></tr>
+  </table>
+  <p style="font-size:.8rem;margin-top:.5rem;font-style:italic;">Suit of the Cover Card adds a twist: ♠ = shadow position (attack one enemy without being targetable back), ♣ = structural (double hit capacity), ♥ = exposed flank (second enemy may target for free), ♦ = Rift-adjacent (gain 1 Blue and 1 Black when revealed).</p>
+</div>
+
+<h3>The Chaos Track</h3>
+<p>Starts at 0. Rises when: a Bust is declared (+1), a Wild Card is called (+1), Five of a Kind is rolled (+1), or a Seer or Drifter face card triggers a dimensional effect (+1 or +2 as noted). At Chaos 5, a Rift Tear erupts.</p>
+
+<table>
+  <tr><th>Die Roll</th><th>Rift Event</th></tr>
+  <tr><td>9</td><td>Temporal echo — all locked dice unlock. Everyone rolls fresh from zero.</td></tr>
+  <tr><td>10</td><td>Dimensional doubles — one combatant (GM's choice) gains a mirror-self ally for 2 rounds.</td></tr>
+  <tr><td>J</td><td>Gravity shift — all movement becomes aerial this round. Narrate accordingly.</td></tr>
+  <tr><td>Q</td><td>Wild Card triggers — the Seer (or highest-Blue character) calls a Wild Card immediately at no card cost.</td></tr>
+  <tr><td>K</td><td>Steam surge — all Cogwrights and mechanical characters gain one free Lock on their next roll.</td></tr>
+  <tr><td>A</td><td>Full Rift — scene location changes entirely. GM narrates the new environment. Chaos Track resets to 0.</td></tr>
+</table>
+
+<hr class="section-divider">
+
+<!-- BAR BRAWL -->
+<div class="mg-header mg-clubs">
+  <div class="mg-label">Minigame Three · Clubs</div>
+  <div class="mg-title">Last Call — The Bar Brawl</div>
+</div>
+
+<div class="flavour">"Nobody drew a gun. That's how you knew it was serious."</div>
+
+<p>Close-quarters chaos. No cover cards — too close for that. No initiative order — everything happens simultaneously and messy. The Brawler is at home here. Everyone else is just trying to survive the furniture.</p>
+
+<h3>Simultaneous Resolution</h3>
+<p>In a Bar Brawl, all participants declare their target and play one card from their Persistent Hand face-down simultaneously. All cards reveal at once. Higher card value in the exchange wins it — but certain combinations create results nobody planned for.</p>
+
+<div class="rule-box">
+  <h4>The Card Exchange</h4>
+  <table>
+    <tr><th>Your Card vs Opponent's</th><th>Result</th></tr>
+    <tr><td>Higher value</td><td>Your hit lands. Opponent loses 1 White chip.</td></tr>
+    <tr><td>Lower value</td><td>Their hit lands. You lose 1 White chip.</td></tr>
+    <tr><td>Same value, different suit</td><td>Both hits land. Both lose 1 White chip. The saloon gets a little more wrecked.</td></tr>
+    <tr><td>Same value, same suit</td><td>Resonance. No hits land. Both gain 1 Blue chip. Something impossible just happened in a bar fight.</td></tr>
+    <tr><td>Face card beats number card</td><td>Hit lands and the winner triggers that face card's ability.</td></tr>
+    <tr><td>Two face cards clash</td><td>Both effects trigger simultaneously. Roll dice to determine who takes priority if they conflict.</td></tr>
+  </table>
+</div>
+
+<div class="rule-box blood-box">
+  <h4>The Brawler's Advantage</h4>
+  <p>In a Bar Brawl, the Brawler's low cards are not weak. Any Clubs card (2–10) played by a Brawler in a Bar Brawl also grants them a Wild Die — they set one die to any value on their next dice roll, no discard required. The chaos of the fight is their natural habitat. A 3 of Clubs in a Brawler's hand during a bar fight is worth more than a King of Spades in anyone else's.</p>
+</div>
+
+<div class="rule-box">
+  <h4>Escalation</h4>
+  <p>Bar Brawls don't stay contained. After each round, roll one die. On a 9, someone draws a weapon — the Bar Brawl becomes a Shootout. On an A, someone goes through a window and the scene ends with them outside on the street. On anything else, it continues. The Chaos Track applies to Bar Brawls — but escalates faster: starts at 2, not 0.</p>
+</div>
+
+<hr class="section-divider">
+
+<!-- CONFRONTATION -->
+<div class="mg-header mg-hearts">
+  <div class="mg-label">Minigame Four · Hearts</div>
+  <div class="mg-title">Words Like Weapons — The Confrontation</div>
+</div>
+
+<div class="flavour">"She didn't threaten him. She didn't need to. She just described, very quietly, what would happen next."</div>
+
+<p>Social pressure, persuasion, seduction, intimidation, negotiation. The Charlatan and Seer have the deepest mechanics here, but a Gunslinger's reputation and a Brawler's presence are real factors in social scenes too.</p>
+
+<div class="rule-box">
+  <h4>Confrontation Stakes</h4>
+  <p>The GM sets Fate Chips as usual. The type of chip demanded signals the nature of the confrontation: Red chips mean it costs someone nerve to proceed, Green chips mean something material is at stake, White chips mean this confrontation has become physically dangerous.</p>
+  <p>The winning hand determines outcome quality exactly as in combat — a Full House wins decisively, a One Pair barely gets there.</p>
+</div>
+
+<div class="rule-box ghost-box">
+  <h4>The Charlatan's Stage</h4>
+  <p>In any Confrontation where the Charlatan has established a false identity or working con, their Hearts cards cost nothing to trigger — no discard required. They are in their element. The cards flow naturally. This does not apply if the Charlatan is operating as themselves.</p>
+</div>
+
+<div class="rule-box">
+  <h4>Romance — A Special Confrontation</h4>
+  <p>Romance uses the same dice but carries emotional weight rather than damage. Both parties roll. The hand ranking describes the quality of the moment, not a winner. Five of a Kind creates a Bond. High Card creates a misunderstanding that deepens the relationship anyway. Both parties gain 1 Red chip on any roll of Three of a Kind or better — the moment restores nerve.</p>
+  <table>
+    <tr><th>Hand</th><th>Romantic Outcome</th></tr>
+    <tr><td>Five of a Kind</td><td>A moment that changes both permanently. Add a Bond.</td></tr>
+    <tr><td>Four of a Kind</td><td>A secret shared willingly. Trust deepens.</td></tr>
+    <tr><td>Full House</td><td>A charged moment ending in a promise or a question.</td></tr>
+    <tr><td>Straight</td><td>Honest conversation. Both gain 1 Blue chip.</td></tr>
+    <tr><td>Three of a Kind</td><td>Something unspoken hangs in the air.</td></tr>
+    <tr><td>Two Pair</td><td>Mixed signals. Neither is sure how the other feels.</td></tr>
+    <tr><td>One Pair</td><td>Awkward but endearing. Warmth without resolution.</td></tr>
+    <tr><td>High Card</td><td>Misread. Drama ahead — but the relationship deepens anyway.</td></tr>
+  </table>
+</div>
+
+<hr class="section-divider">
+
+<!-- WORKSHOP -->
+<div class="mg-header mg-gold">
+  <div class="mg-label">Minigame Five · Clubs &amp; Diamonds</div>
+  <div class="mg-title">The Workshop — Building &amp; Sabotage</div>
+</div>
+
+<div class="flavour">"The Cogwright didn't call it a bomb. She called it a 'persuasion device.'"</div>
+
+<p>Construction, modification, sabotage, and route-finding. The Cogwright builds things that change the physical world permanently. The Drifter navigates routes that shouldn't exist. Both use this space — one with grease and gears, the other with instinct and Rift-sense.</p>
+
+<div class="rule-box">
+  <h4>Workshop Actions</h4>
+  <table>
+    <tr><th>Action</th><th>Difficulty</th><th>Base Effect</th></tr>
+    <tr><td>Basic repair or modification</td><td>Two Pair</td><td>Item functions; Cogwright gains 1 Green chip</td></tr>
+    <tr><td>Complex build (scene-changing)</td><td>Full House</td><td>Permanent scene alteration; Cogwright gains 2 Green</td></tr>
+    <tr><td>Sabotage (disabling something)</td><td>Three of a Kind</td><td>Target device/cover fails on next use</td></tr>
+    <tr><td>Rift Navigation (Drifter)</td><td>Two Pair</td><td>Party moves to any location this session; Drifter gains 1 Red</td></tr>
+    <tr><td>Impossible Build (legendary)</td><td>Four of a Kind</td><td>Something that shouldn't exist, exists. Chaos Track +1.</td></tr>
+  </table>
+  <p style="font-size:.8rem;margin-top:.5rem;font-style:italic;">Cogwright may Lock one die before any Workshop roll by discarding a Clubs card. Drifter may access a Wild Die during any navigation roll by discarding a Diamonds card.</p>
+</div>
+
+<hr class="section-divider">
+
+<!-- GM TOOLS -->
+<div class="chapter-label">Chapter Ten</div>
+<h2>Running the Frontier — GM Tools</h2>
+
+<h3>The GM's Hand</h3>
+<p>The GM holds five cards like every player. The GM's hand is not class-specific — they access abilities across all suits. Their cards are spent on narrative complications, escalations, and reversals. The GM's face cards do not trigger class abilities — they alter the scene structure itself.</p>
+
+<div class="rule-box gold-box">
+  <h4>GM Face Card Effects</h4>
+  <table>
+    <tr><th>Card</th><th>Effect</th></tr>
+    <tr><td>Any Jack</td><td><em>Complication:</em> An unexpected element enters the scene. Not hostile necessarily — just complicating. The GM narrates what arrives and why it changes things.</td></tr>
+    <tr><td>Any Queen</td><td><em>Escalation:</em> Chaos Track +1. One permanent element of the scene changes — a structural detail collapses, a secret is exposed, a door locks.</td></tr>
+    <tr><td>Any King</td><td><em>The Other Player:</em> A new named NPC enters with their own agenda conflicting with at least one character's goal. They are not the GM's puppet — they have their own scale position and motivations.</td></tr>
+    <tr><td>Any Ace</td><td><em>The World Speaks:</em> Every character experiences a vision, memory, or dimensional bleed simultaneously. No mechanical effect — pure story moment. No card discard required if it serves the narrative.</td></tr>
+    <tr><td>Joker</td><td><em>The Frontier Decides:</em> Pass the card to the table. Players vote on the complication. Majority rules. The GM cannot veto.</td></tr>
+  </table>
+</div>
+
+<div class="rule-box">
+  <h4>The Fate Cut</h4>
+  <p>At the start of each scene, the GM secretly draws one card and holds it face-down. This is the hidden shape of what the scene wants to become. Reveal it whenever the table needs momentum — when players feel too comfortable, when the scene stalls, or in response to a Joker. Unused Fate Cuts are discarded. The Frontier moves on.</p>
+</div>
+
+<h3>NPC Tiers</h3>
+<table>
+  <tr><th>Tier</th><th>Dice</th><th>Cards</th><th>Chips</th></tr>
+  <tr><td>Grunt</td><td>2 dice, no locking</td><td>No hand</td><td>5 White, 0 others</td></tr>
+  <tr><td>Veteran</td><td>3 dice, 1 lock</td><td>3-card hand</td><td>8 White, 3 Red</td></tr>
+  <tr><td>Boss</td><td>Full 5 dice</td><td>5-card hand</td><td>Full class stack</td></tr>
+  <tr><td>Legend</td><td>5 dice + 1 pre-locked</td><td>5-card hand + 1 Gambit</td><td>Full stack + immune to Bust</td></tr>
+</table>
+
+<h3>Scene Types</h3>
+<table>
+  <tr><th>Scene Type</th><th>Active Minigames</th><th>Chaos Track</th></tr>
+  <tr><td>Powder Keg (combat)</td><td>Duel, Shootout, Bar Brawl</td><td>Starts at 0</td></tr>
+  <tr><td>Crossroads (social)</td><td>Confrontation, Romance</td><td>No track</td></tr>
+  <tr><td>The Workshop (technical)</td><td>Workshop, limited Duel</td><td>No track unless Rift-adjacent</td></tr>
+  <tr><td>The Fold (exploration)</td><td>All minigames active</td><td>Starts at 3</td></tr>
+</table>
+
+<hr class="section-divider">
+
+<!-- QUICK REFERENCE -->
+<div class="chapter-label">Quick Reference</div>
+<h2>Summary Card</h2>
+
+<div class="rule-box">
+  <h4>Roll Sequence</h4>
+  <div class="flow">
+    <div class="flow-step"><div class="flow-num teal">1</div><div class="flow-text">Declare stakes. GM sets Fate Chips. Match or walk away.</div></div>
+    <div class="flow-step"><div class="flow-num teal">2</div><div class="flow-text">Roll all 5 dice.</div></div>
+    <div class="flow-step"><div class="flow-num teal">3</div><div class="flow-text">Lock keepers — reroll rest. Repeat once more (3 rolls total).</div></div>
+    <div class="flow-step"><div class="flow-num teal">4</div><div class="flow-text">Compare hands to threshold or opponent.</div></div>
+    <div class="flow-step"><div class="flow-num teal">→</div><div class="flow-text">Winner narrates. Loser responds.</div></div>
+  </div>
+</div>
+
+<div class="rule-box blood-box">
+  <h4>All Costs at a Glance</h4>
+  <table>
+    <tr><th>Action</th><th>Cost</th></tr>
+    <tr><td>Extra reroll (any action, matching suit)</td><td>Discard 1 number card of matching suit</td></tr>
+    <tr><td>Bust — discard locked, reroll all</td><td>Risk: lose 2 White on loss; gain 1 Blue on win</td></tr>
+    <tr><td>Quick Draw (go first in Duel)</td><td>Discard highest Spades card OR spend 1 Red</td></tr>
+    <tr><td>Shrug off a Grazed hit</td><td>1 White chip</td></tr>
+    <tr><td>Reroll one die after final reveal</td><td>1 Blue chip</td></tr>
+    <tr><td>Survive what should kill you</td><td>2 Blue chips — once per session</td></tr>
+    <tr><td>Wild Card (Seer only)</td><td>Discard 1 Diamond face card + Chaos Track +1</td></tr>
+    <tr><td>Rift Reading (non-Seer)</td><td>Diamond face card from hand + 1 Black chip</td></tr>
+    <tr><td>Recharge hand to 5 cards</td><td>Class ability required — GM gains 1 Fate Chip per card drawn</td></tr>
+    <tr><td>Pass one card left</td><td>Once per scene. Recipient discards one to return to 5.</td></tr>
+    <tr><td>GM redraw hand (3 cards)</td><td>Spend 3 Fate Chips</td></tr>
+    <tr><td>Hire Grunt NPC (1 scene)</td><td>3 Green chips</td></tr>
+    <tr><td>Shed 1 Black chip</td><td>Complete a meaningful Crossroads scene</td></tr>
+    <tr><td>Shed 3 Black chips</td><td>Defeat your Rift Collector in a Duel</td></tr>
+    <tr><td>New class ability (XP)</td><td>10–15 XP depending on tier</td></tr>
+    <tr><td>Class transition (XP)</td><td>20 XP + narrative threshold moment</td></tr>
+  </table>
+</div>
+
+<div class="rule-box ghost-box">
+  <h4>The Card Hand at a Glance</h4>
+  <table>
+    <tr><th>Card Type</th><th>In-Class Suit</th><th>Out-of-Class Suit</th></tr>
+    <tr><td>Number (2–10)</td><td>Trigger class ability OR discard for 1 reroll on matching action</td><td>Discard for 1 reroll on matching-suit action only</td></tr>
+    <tr><td>Face (J/Q/K/A)</td><td>Trigger named class ability — cannot use for rerolls</td><td>Pass left — too valuable to discard cheaply</td></tr>
+    <tr><td>Diamond face (any class)</td><td>Rift Reading access OR Seer Wild Card</td><td>Rift Reading — costs 1 Black chip for non-Seers</td></tr>
+    <tr><td>Joker</td><td colspan="2">Play any time, any scene: reshape hand / trigger Rift Tear / Walk Away. Never reshuffled.</td></tr>
+  </table>
+</div>
+
+</div><!-- /page -->
+
+<div class="page-footer">
+  RIFTS &amp; REVOLVERS &nbsp;·&nbsp; CORE RULES v2.0 &nbsp;·&nbsp; WHERE THE WEST BLEEDS INTO THE BEYOND
+</div>
+
+</body>
+</html>
